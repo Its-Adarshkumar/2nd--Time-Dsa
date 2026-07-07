@@ -1,4 +1,4 @@
-package Sorting;
+//package Sorting;
 
 public class selectionSort {
     public static void print(int arr[]){
@@ -11,7 +11,7 @@ public class selectionSort {
         int  n=arr.length;
         print(arr);
 
-        for(int i=0;i<n-1;i++){
+        for(int i=0;i<n-2;i++){
             int min=Integer.MAX_VALUE;
             int mindex=-1;
             for(int j=i;j<n;j++){
