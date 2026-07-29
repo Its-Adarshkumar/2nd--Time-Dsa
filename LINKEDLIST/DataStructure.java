@@ -35,16 +35,6 @@ class linkedList{  // user defined data type
         size++;
     }
 
-    void display(){
-        if(head==null) return;
-        Node temp=head;
-        while (temp!=null) {
-            System.out.print(temp.val+" ");
-            temp=temp.next;
-        }
-        System.out.println();
-    }
-
     void deleteAtHead(){
         if(head==null){
             System.out.println("List is empty!");
@@ -53,6 +43,65 @@ class linkedList{  // user defined data type
         head=head.next;
         if(head==null) tail=null;
         size--;
+    }
+
+    int search(int val){
+        if(head==null) return -1;
+        int idx=0;
+        Node temp=head;
+        while (temp!=null) {
+            if(temp.val==val) return idx;
+            temp=temp.next;
+            idx++;
+        }
+        return -1;
+    }
+
+    void insert(int val,int idx){
+        if(idx<0 ||  idx>size){
+            System.out.println("invalid idx");
+        }
+
+        else if(idx==0) addAtHead(val);
+        else if(idx==size) addAtTail(val);
+        else {
+            Node temp=head;
+            for(int i=0;i<idx-1;i++){
+                temp=temp.next;
+            }
+            Node t=new Node(val);
+            t.next=temp.next;
+            temp.next=t;
+            size++;
+        }
+    }
+
+    void delete(int idx){
+        if(idx<0 || idx>=size) {
+            System.out.println("Invalid idx");
+            return;
+        }
+        if(idx==0){
+            deleteAtHead();
+            return;
+        }
+        Node temp=head;
+        for(int i=0;i<idx-1;i++){
+           temp=temp.next;
+        }
+        temp.next=temp.next.next; //delete 
+        if(idx==size-1) tail=temp; // deleting tail
+        size --;
+    }
+
+    void display(){
+        if(head==null) return;
+        Node temp=head;
+        while (temp!=null) {
+            System.out.print(temp.val+" ");
+            temp=temp.next;
+        }
+        System.out.println();
     }
 }
 
@@ -69,6 +118,13 @@ public class DataStructure {
         ll.display();
         ll.deleteAtHead();
         ll.display();
-        System.out.println(ll.size);
+        //System.out.println(ll.size);
+
+        //System.out.println(ll.search(20));
+
+        ll.insert(60,3);
+        ll.display(); 
+
+        ll.delete(3); ll.display();
     }
 }
