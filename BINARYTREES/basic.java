@@ -38,12 +38,18 @@ public class basic {
         int subMax=Math.max(max(root.left), max(root.right));
         return Math.max(root.val,subMax);
     }
+
+    private static int levels(Node root){
+        if(root==null) return 0;
+        return 1+Math.max(levels(root.left),levels(root.right));
+    }
+
     public static void main(String[] args) {
         //        3
         //       /  \
         //      4    2
-        //     / \   / \
-        //    -1  1  6  9
+        //     / \  / \
+        //    -1  1 6  9
         Node a=new Node(3); // root node
         Node b=new Node(4);
         Node c=new Node(2);
@@ -59,6 +65,6 @@ public class basic {
         System.out.println(size(a));
         System.out.println(sum(a));
         System.out.println(product(a));
-        
+        System.out.println(levels(a));
     }
 }
