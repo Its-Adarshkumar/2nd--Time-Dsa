@@ -21,6 +21,15 @@ class Pair{
     }
 }
 
+class Twin{
+    int min;
+    int max;
+    Twin(int min,int max){
+        this.min=min;
+        this.max=max;
+    }
+}
+
 public class basic {
     private static void display(Node root){
         if(root==null) return;
@@ -54,6 +63,15 @@ public class basic {
     private static int levels(Node root){
         if(root==null) return 0;
         return 1+Math.max(levels(root.left),levels(root.right));
+    }
+
+    private static Twin minMax(Node root){
+        if(root==null) return new Twin(Integer.MAX_VALUE, Integer.MIN_VALUE);
+        Twin left=minMax(root.left);
+        Twin right=minMax(root.right);
+        int min=Math.min(root.val,Math.min(left.min,right.min));
+        int max=Math.max(root.val,Math.max(left.max,right.max));
+        return new Twin(min, max);
     }
 
     public static void levelOrder(Node root){
