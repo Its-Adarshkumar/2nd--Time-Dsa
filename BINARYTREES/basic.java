@@ -30,6 +30,23 @@ class Twin{
     }
 }
 
+class Quad{
+    int min;
+    int max;
+    int size;
+    int sum;
+    Quad(int min,int max,int size,int sum){
+        this.min=min;
+        this.max=max;
+        this.size=size;
+        this.sum=sum;
+    }
+
+    void display(){
+        System.out.println(min +" "+max+" "+size+" "+sum);
+    }
+}
+
 public class basic {
     private static void display(Node root){
         if(root==null) return;
@@ -109,6 +126,17 @@ public class basic {
         kThLevel(root.right, level+1, k);
     }
 
+    public static Quad minMAxSizeSum(Node root){
+        if(root==null) return new Quad(Integer.MAX_VALUE, Integer.MIN_VALUE, 0, 0);
+        Quad lst=minMAxSizeSum(root.left);
+        Quad rst=minMAxSizeSum(root.right);
+        int max=Math.max(root.val, Math.max(lst.max, rst.max));
+        int min=Math.min(root.val, Math.min(lst.min, rst.min));
+        int size=1+lst.size+rst.size;
+        int sum=root.val+lst.sum+rst.sum;
+        return new Quad(min, max, size, sum);
+    }
+
     public static void main(String[] args) {
         //        3
         //       /  \
@@ -126,17 +154,20 @@ public class basic {
         b.left=d; b.right=e;
         c.left=f; c.right=g;
         display(a);
+        // System.out.println();
+        // System.out.println(size(a));
+        // System.out.println(sum(a));
+        // System.out.println(product(a));
+        // System.out.println(levels(a));
+        // levelOrder(a);
+        // levelOrderLineWise(a);
+        // System.out.println();
+        // for(int i=0;i<levels(a);i++){
+        //     kThLevel(a,0,i);
+        //     System.out.println();
+        // }
         System.out.println();
-        System.out.println(size(a));
-        System.out.println(sum(a));
-        System.out.println(product(a));
-        System.out.println(levels(a));
-        levelOrder(a);
-        levelOrderLineWise(a);
-        System.out.println();
-        for(int i=0;i<levels(a);i++){
-            kThLevel(a,0,i);
-            System.out.println();
-        }
+        minMAxSizeSum(a).display();
+        
     }
 }
