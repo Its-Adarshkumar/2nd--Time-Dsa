@@ -1,4 +1,4 @@
-3package MAPS_AND_SET;
+package MAPS_AND_SET;
 
 import java.util.HashSet;
 
